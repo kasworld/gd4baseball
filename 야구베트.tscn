@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://csdcaadrse82r"]
+
+[ext_resource type="Script" uid="uid://bq3ovqv0khcsj" path="res://야구베트.gd" id="1_5hh2p"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gewx7"]
+bounce = 10.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5hh2p"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 3.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5hh2p"]
+points = PackedVector3Array(-0.3, -1.5, 0, -0.29859, -1.5, -0.0294244, -0.29859, -1.5, 0.0293657, -0.3, 1.5, 0, -0.294244, -1.5, -0.0585552, -0.29859, 1.5, -0.0294244, -0.294244, -1.5, 0.0584965, -0.29859, 1.5, 0.0293657, -0.287138, -1.5, -0.0870987, -0.294244, 1.5, -0.0585552, -0.287138, -1.5, 0.0870399, -0.294244, 1.5, 0.0584965, -0.277212, -1.5, -0.11482, -0.287138, 1.5, -0.0870987, -0.277212, -1.5, 0.114761, -0.287138, 1.5, 0.0870399, -0.264585, -1.5, -0.141425, -0.277212, 1.5, -0.11482, -0.264585, -1.5, 0.141366, -0.277212, 1.5, 0.114761, -0.249491, -1.5, -0.16668, -0.264585, 1.5, -0.141425, -0.249491, -1.5, 0.166621, -0.264585, 1.5, 0.141366, -0.23193, -1.5, -0.190348, -0.249491, 1.5, -0.16668, -0.23193, -1.5, 0.19029, -0.249491, 1.5, 0.166621, -0.212138, -1.5, -0.212138, -0.23193, 1.5, -0.190348, -0.212138, -1.5, 0.212079, -0.23193, 1.5, 0.19029, -0.190348, -1.5, -0.23193, -0.212138, 1.5, -0.212138, -0.190348, -1.5, 0.231872, -0.212138, 1.5, 0.212079, -0.16668, -1.5, -0.249491, -0.190348, 1.5, -0.23193, -0.16668, -1.5, 0.249432, -0.190348, 1.5, 0.231872, -0.141425, -1.5, -0.264585, -0.16668, 1.5, -0.249491, -0.141425, -1.5, 0.264526, -0.16668, 1.5, 0.249432, -0.11482, -1.5, -0.277212, -0.141425, 1.5, -0.264585, -0.11482, -1.5, 0.277153, -0.141425, 1.5, 0.264526, -0.0870987, -1.5, -0.287138, -0.11482, 1.5, -0.277212, -0.0870987, -1.5, 0.287079, -0.11482, 1.5, 0.277153, -0.0585552, -1.5, -0.294244, -0.0870987, 1.5, -0.287138, -0.0585552, -1.5, 0.294186, -0.0870987, 1.5, 0.287079, -0.0294244, -1.5, -0.29859, -0.0585552, 1.5, -0.294244, -0.0294244, -1.5, 0.298532, -0.0585552, 1.5, 0.294186, 0, -1.5, -0.3, -0.0294244, 1.5, -0.29859, 0, -1.5, 0.3, -0.0294244, 1.5, 0.298532, 0.0293657, -1.5, -0.29859, 0, 1.5, -0.3, 0.0293657, -1.5, 0.298532, 0, 1.5, 0.3, 0.0584965, -1.5, -0.294244, 0.0293657, 1.5, -0.29859, 0.0584965, -1.5, 0.294186, 0.0293657, 1.5, 0.298532, 0.0870399, -1.5, -0.287138, 0.0584965, 1.5, -0.294244, 0.0870399, -1.5, 0.287079, 0.0584965, 1.5, 0.294186, 0.114761, -1.5, -0.277212, 0.0870399, 1.5, -0.287138, 0.114761, -1.5, 0.277153, 0.0870399, 1.5, 0.287079, 0.141366, -1.5, -0.264585, 0.114761, 1.5, -0.277212, 0.141366, -1.5, 0.264526, 0.114761, 1.5, 0.277153, 0.166621, -1.5, -0.249491, 0.141366, 1.5, -0.264585, 0.166621, -1.5, 0.249432, 0.141366, 1.5, 0.264526, 0.19029, -1.5, -0.23193, 0.166621, 1.5, -0.249491, 0.19029, -1.5, 0.231872, 0.166621, 1.5, 0.249432, 0.212079, -1.5, -0.212138, 0.19029, 1.5, -0.23193, 0.212079, -1.5, 0.212079, 0.19029, 1.5, 0.231872, 0.231872, -1.5, -0.190348, 0.212079, 1.5, -0.212138, 0.231872, -1.5, 0.19029, 0.212079, 1.5, 0.212079, 0.249432, -1.5, -0.16668, 0.231872, 1.5, -0.190348, 0.249432, -1.5, 0.166621, 0.231872, 1.5, 0.19029, 0.264526, -1.5, -0.141425, 0.249432, 1.5, -0.16668, 0.264526, -1.5, 0.141366, 0.249432, 1.5, 0.166621, 0.277153, -1.5, -0.11482, 0.264526, 1.5, -0.141425, 0.277153, -1.5, 0.114761, 0.264526, 1.5, 0.141366, 0.287079, -1.5, -0.0870987, 0.277153, 1.5, -0.11482, 0.287079, -1.5, 0.0870399, 0.277153, 1.5, 0.114761, 0.294186, -1.5, -0.0585552, 0.287079, 1.5, -0.0870987, 0.294186, -1.5, 0.0584965, 0.287079, 1.5, 0.0870399, 0.298532, -1.5, -0.0294244, 0.294186, 1.5, -0.0585552, 0.298532, -1.5, 0.0293657, 0.294186, 1.5, 0.0584965, 0.3, -1.5, 0, 0.298532, 1.5, -0.0294244, 0.298532, 1.5, 0.0293657, 0.3, 1.5, 0)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5hh2p"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8boj5"]
+height = 1.0
+radius = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyha7"]
+resource_local_to_scene = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uh5x0"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_qyha7")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbg6f"]
+resource_local_to_scene = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_x2x7l"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_sbg6f")
+radius = 0.07
+height = 0.14
+
+[node name="야구베트" type="Node3D"]
+script = ExtResource("1_5hh2p")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("../StaticBody3D")
+motor/enable = true
+motor/target_velocity = -6.98132
+motor/max_impulse = 10.0
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_gewx7")
+gravity_scale = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.5, 0, 0)
+mesh = SubResource("CylinderMesh_5hh2p")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.5, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_5hh2p")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_5hh2p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("CylinderShape3D_8boj5")
+
+[node name="막대모양" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("CylinderMesh_uh5x0")
+skeleton = NodePath("../..")
+
+[node name="공모양" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("SphereMesh_x2x7l")
+skeleton = NodePath("../..")

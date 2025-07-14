@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://hpbksrirxv1d"]
+
+[ext_resource type="Script" path="res://pin.gd" id="1_nikp6"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nkspu"]
+resource_local_to_scene = true
+friction = 0.0
+bounce = 0.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qyha7"]
+height = 4.0
+radius = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nikp6"]
+resource_local_to_scene = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qyha7"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_nikp6")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gflbs"]
+resource_local_to_scene = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_a0eh7"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_gflbs")
+radius = 0.07
+height = 0.14
+
+[node name="Pin" type="StaticBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_nkspu")
+script = ExtResource("1_nikp6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_qyha7")
+
+[node name="막대모양" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_qyha7")
+
+[node name="공모양" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("SphereMesh_a0eh7")
+
+[node name="Label3DCollisionCount" type="Label3D" parent="."]
+pixel_size = 0.01
+billboard = 1
+no_depth_test = true
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(1, 1, 1, 1)

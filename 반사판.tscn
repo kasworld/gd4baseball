@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dstymu0b6uaoq"]
+
+[ext_resource type="Script" uid="uid://bqqpw3u5bw10h" path="res://반사판.gd" id="1_xwmn8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xwmn8"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elwgu"]
+resource_local_to_scene = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xwmn8"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_elwgu")
+size = Vector2(1, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xwmn8"]
+data = PackedVector3Array(0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, 0.5, 0, -0.5)
+
+[node name="반사판" type="StaticBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_xwmn8")
+script = ExtResource("1_xwmn8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_xwmn8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_xwmn8")
