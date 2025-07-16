@@ -1,21 +1,21 @@
 extends StaticBody3D
-class_name Pin
+class_name 수비수
 
 var default_pos :Vector3
-func set_default_pos(pos :Vector3) -> Pin:
+func set_default_pos(pos :Vector3) -> 수비수:
 	default_pos = pos
 	return self
 
-func set_label(s :String) -> Pin:
+func set_label(s :String) -> 수비수:
 	$Label3D.text = s
 	return self
 
-func set_material(mat :Material) -> Pin:
+func set_material(mat :Material) -> 수비수:
 	$막대모양.mesh.material = mat
 	$"공모양".mesh.material = mat
 	return self
 
-func set_color(co :Color) -> Pin:
+func set_color(co :Color) -> 수비수:
 	$막대모양.mesh.material.albedo_color = co
 	$"공모양".mesh.material.albedo_color = co
 	return self
@@ -23,7 +23,7 @@ func set_color(co :Color) -> Pin:
 func get_color() -> Color:
 	return $막대모양.mesh.material.albedo_color
 
-func set_radius_height(r :float, h:float) -> Pin:
+func set_radius_height(r :float, h:float) -> 수비수:
 	$막대모양.mesh.top_radius = r
 	$막대모양.mesh.bottom_radius = r
 	$막대모양.mesh.height = h

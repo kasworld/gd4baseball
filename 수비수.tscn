@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://hpbksrirxv1d"]
 
-[ext_resource type="Script" uid="uid://bpusp3ev387k1" path="res://pin.gd" id="1_nikp6"]
+[ext_resource type="Script" uid="uid://bpusp3ev387k1" path="res://수비수.gd" id="1_jbs3q"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nkspu"]
 resource_local_to_scene = true
@@ -30,9 +30,9 @@ material = SubResource("StandardMaterial3D_gflbs")
 radius = 0.07
 height = 0.14
 
-[node name="Pin" type="StaticBody3D"]
+[node name="수비수" type="StaticBody3D"]
 physics_material_override = SubResource("PhysicsMaterial_nkspu")
-script = ExtResource("1_nikp6")
+script = ExtResource("1_jbs3q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_qyha7")

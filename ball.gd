@@ -40,6 +40,6 @@ func _on_body_entered(body: Node) -> void:
 	if body is Wall and position.z >= Config.WorldSize.z -$CollisionShape3D.shape.radius*2:
 		queue_free()
 		ball_ended.emit(position)
-	elif body is Pin:
+	elif body is 수비수:
 		pass
 		#body.공부딪힘(self)

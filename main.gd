@@ -13,13 +13,13 @@ func _ready() -> void:
 	dark_colors.shuffle()
 	reset_camera_pos()
 	set_walls()
-	add_수비수()
+	add_수비수들()
 	$"야구베트".position = 베이스위치.홈 + Vector3(-1.5,0,0)
-	$"야구베트".set_radius_height(Config.BallRadius, Config.WorldSize.y)
+	$"야구베트".set_radius_height(Config.BallRadius/2, Config.WorldSize.y)
 
 var 베이스위치 :Dictionary
 var 수비수이름위치 :Dictionary 
-func add_수비수() -> void:
+func add_수비수들() -> void:
 	수비수이름위치 = {}
 	베이스위치 = {}
 	var 내야shift = Config.WorldSize.x / 4
@@ -39,7 +39,7 @@ func add_수비수() -> void:
 	수비수이름위치["우익수"] = 베이스위치["2루"] + Vector3(내야shift*1.5,0,-내야shift)
 	수비수이름위치["좌익수"] = 베이스위치["2루"] + Vector3(-내야shift*1.5,0,-내야shift)
 	for n in 수비수이름위치.keys():
-		add_pin(n)
+		add_수비수(n)
 	for n in 베이스위치:
 		add_베이스(n)
 	add_line(베이스위치["홈"], 베이스위치["1루"])
@@ -47,10 +47,10 @@ func add_수비수() -> void:
 	add_line(베이스위치["3루"], 베이스위치["2루"])
 	add_line(베이스위치["3루"], 베이스위치["홈"])
 
-func add_pin(name :String) -> Pin:
-	var b = preload("res://pin.tscn").instantiate().set_color( get_randomcolor()
+func add_수비수(name :String) -> 수비수:
+	var b = preload("res://수비수.tscn").instantiate().set_color( get_randomcolor()
 		).set_label(name
-		).set_radius_height(Config.BallRadius, Config.WorldSize.y)
+		).set_radius_height(Config.BallRadius/2, Config.WorldSize.y)
 	b.position = 수비수이름위치[name]
 	b.set_default_pos(b.position) 
 	$PinContainer.add_child(b)
