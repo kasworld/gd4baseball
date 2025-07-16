@@ -6,6 +6,10 @@ func set_default_pos(pos :Vector3) -> Pin:
 	default_pos = pos
 	return self
 
+func set_label(s :String) -> Pin:
+	$Label3D.text = s
+	return self
+
 func set_material(mat :Material) -> Pin:
 	$막대모양.mesh.material = mat
 	$"공모양".mesh.material = mat
@@ -34,7 +38,7 @@ var collision_count :int
 func 공부딪힘(b :Ball) -> void:
 	position = default_pos + Vector3(randfn(0.0, 0.01), 0 , randfn(0.0, 0.01))
 	collision_count += 1
-	$Label3DCollisionCount.text = "%s" % collision_count
+	$Label3D.text = "%s" % collision_count
 
 func show_collision_count(b :bool) -> void:
-	$Label3DCollisionCount.visible = b
+	$Label3D.visible = b

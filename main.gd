@@ -13,40 +13,32 @@ func _ready() -> void:
 	dark_colors.shuffle()
 	reset_camera_pos()
 	set_walls()
-	add_반사판()
-	var co = get_randomcolor()
-	var l = Config.BallRadius*6
-	var w = Config.BallRadius/3
-	var w2 = Config.BallRadius*1
-	$Arrow3DShoot.set_color(co).set_size(l,w,w2)
-	$Arrow3DShoot.position = Config.WorldSize/2 + Vector3(0,0,-Config.WorldSize.z/4)
-	$"야구베트".position = Config.WorldSize/2 + Vector3(-2,0,Config.WorldSize.z/4)
+	add_수비수()
+	$"야구베트".position = 수비수이름위치.포수 + Vector3(-1.6,0,-1.5)
 
-func add_반사판() -> void:
-	var w
-	var co 
-	var co1 = get_randomcolor()
-	var co2 = get_randomcolor()
-	var rad
-	for deg in range(90,270,5):
-		rad = deg_to_rad(deg)
-		co = lerp(co1,co2, float(deg) / 180.0 )
-		w = preload("res://반사판.tscn").instantiate().set_color(co)
-		w.rotate_y(PI+rad)
-		w.position = Vector3(sin(rad), 0, cos(rad))*Config.WorldSize.x/2 + Config.WorldSize/2
-		add_child(w)
+var 수비수이름위치 :Dictionary 
+func add_수비수() -> void:
+	수비수이름위치 = {}
+	var 내야shift = Config.WorldSize.x / 3
+	var 투수위치 = Config.WorldSize/2 
+	투수위치.z = Config.WorldSize.z - 내야shift -1
+	수비수이름위치["투수"] = 투수위치
+	수비수이름위치["포수"] = 투수위치 + Vector3(0,0,내야shift) # 포수
+	수비수이름위치["1루수"] = 투수위치 + Vector3(내야shift,0,0) # 1루수 
+	수비수이름위치["3루수"] = 투수위치 + Vector3(-내야shift,0,0) # 3루수
+	수비수이름위치["2루수"] = 투수위치 + Vector3(2,0,-내야shift) # 2루수 
+	수비수이름위치["유격수"] = 투수위치 + Vector3(-2,0,-내야shift) # 유격수
+	for n in 수비수이름위치.keys():
+		add_pin(n)
 
-	#co = get_randomcolor()
-	#rad = deg_to_rad(45)
-	#var pos_z := Config.BounceArchRadius -0.5 
-	#w = preload("res://반사판.tscn").instantiate().set_color(co)
-	#w.rotate_y(PI-rad)
-	#w.position = Vector3(sin(rad)*0.7, Config.WorldSize.y/2, pos_z )
-	#add_child(w)
-	#w = preload("res://반사판.tscn").instantiate().set_color(co)
-	#w.rotate_y(PI+rad)
-	#w.position = Vector3(Config.WorldSize.x-sin(rad)*0.7, Config.WorldSize.y/2, pos_z)
-	#add_child(w)
+func add_pin(name :String) -> Pin:
+	var b = preload("res://pin.tscn").instantiate().set_color( get_randomcolor()
+		).set_label(name
+		).set_radius_height(Config.BallRadius/6, Config.WorldSize.y)
+	b.position = 수비수이름위치[name]
+	b.set_default_pos(b.position) 
+	$PinContainer.add_child(b)
+	return b	
 
 func set_walls() -> void:
 	$WallContainer.add_child(set_pos_rot(Config.BottomCenter, Vector3.ZERO,
@@ -76,14 +68,13 @@ func set_pos_rot(pos :Vector3, rot:Vector3, n: Node3D) -> Node3D:
 func shoot_ball(pos :Vector3) -> void:
 	var 발사속도 = $"왼쪽패널/발사속도".value
 	var d = 	preload("res://ball.tscn").instantiate().start_life(
-		#).set_material(Config.tex_array.pick_random()
 		).set_radius(Config.BallRadius
 	)
 	d.set_velocity(Vector3(0,0,발사속도))
 	$BallContainer.add_child(d)
 	ball_droped += 1
 	d.ball_ended.connect(ball_ended)
-	d.position = pos + Vector3(0,0,Config.BallRadius*4)
+	d.position = pos + Vector3(0,0,Config.BallRadius*2)
 
 func ball_ended(pos :Vector3) -> void:
 	pass
@@ -94,11 +85,7 @@ func _process(delta: float) -> void:
 		var firstball = $BallContainer.get_child(0)
 		if firstball.get_life_dur() > 3:
 			firstball.queue_free()
-	
 	update_label()
-	$Arrow3DShoot.position.x = $"왼쪽패널/화살표위치".value/100*(Config.WorldSize.x-Config.BallRadius)
-	$Arrow3DShoot.position.x = clampf($Arrow3DShoot.position.x, Config.BallRadius, Config.WorldSize.x-Config.BallRadius)
-	
 	var t = Time.get_unix_time_from_system() /-3.0
 	if camera_move:
 		$Camera3D.position = Vector3(sin(t)*Config.WorldSize.x/2, Config.BottomSize.length()*0.4, cos(t)*Config.WorldSize.z/2) + Config.WorldSize/2
@@ -116,19 +103,9 @@ func update_label() -> void:
 	RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_TOTAL_DRAW_CALLS_IN_FRAME),
 	]
 
-func _on_왼쪽이동_pressed() -> void:
-	$Arrow3DShoot.position.x -= 0.1
-	$Arrow3DShoot.position.x = clampf($Arrow3DShoot.position.x, Config.BallRadius, Config.WorldSize.x-Config.BallRadius)
-
-func _on_오른쪽이동_pressed() -> void:
-	$Arrow3DShoot.position.x += 0.1
-	$Arrow3DShoot.position.x = clampf($Arrow3DShoot.position.x, Config.BallRadius, Config.WorldSize.x-Config.BallRadius)
-
 var key2fn = {
 	KEY_ESCAPE:_on_button_esc_pressed,
 	KEY_ENTER:_on_카메라변경_pressed,
-	KEY_LEFT: _on_왼쪽이동_pressed,
-	KEY_RIGHT: _on_오른쪽이동_pressed,
 }
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
@@ -152,7 +129,7 @@ func reset_camera_pos()->void:
 	$Camera3D.far = Config.WorldSize.length()
 
 func _on_timer공추가_timeout() -> void:
-	shoot_ball($Arrow3DShoot.position)
+	shoot_ball(수비수이름위치.투수)
 
 func _on_생성속도_value_changed(value: float) -> void:
 	$"Timer공추가".wait_time = value

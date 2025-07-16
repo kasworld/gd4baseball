@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://hpbksrirxv1d"]
 
-[ext_resource type="Script" path="res://pin.gd" id="1_nikp6"]
+[ext_resource type="Script" uid="uid://bpusp3ev387k1" path="res://pin.gd" id="1_nikp6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nkspu"]
 resource_local_to_scene = true
@@ -8,7 +8,7 @@ friction = 0.0
 bounce = 0.5
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qyha7"]
-height = 4.0
+height = 1.0
 radius = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nikp6"]
@@ -44,7 +44,7 @@ mesh = SubResource("CylinderMesh_qyha7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("SphereMesh_a0eh7")
 
-[node name="Label3DCollisionCount" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="."]
 pixel_size = 0.01
 billboard = 1
 no_depth_test = true

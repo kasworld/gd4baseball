@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvyp8di51u61r"]
+[gd_scene load_steps=4 format=3 uid="uid://bvyp8di51u61r"]
 
 [ext_resource type="Script" uid="uid://c0iidw5g3885m" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://c8npqlgeyy3xa" path="res://arrow3d/arrow_3d.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://csdcaadrse82r" path="res://야구베트.tscn" id="3_h2yge"]
 
 [sub_resource type="Theme" id="Theme_h2yge"]
@@ -62,24 +61,14 @@ max_value = 50.0
 step = 0.1
 value = 20.0
 
-[node name="Label3" type="Label" parent="왼쪽패널"]
-layout_mode = 2
-text = "화살표위치"
-
-[node name="화살표위치" type="HSlider" parent="왼쪽패널"]
-layout_mode = 2
-step = 0.1
-value = 50.0
-
 [node name="WallContainer" type="Node3D" parent="."]
 
 [node name="Timer공추가" type="Timer" parent="."]
 autostart = true
 
-[node name="Arrow3DShoot" parent="." instance=ExtResource("3_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-
 [node name="야구베트" parent="." instance=ExtResource("3_h2yge")]
+
+[node name="PinContainer" type="Node3D" parent="."]
 
 [connection signal="value_changed" from="왼쪽패널/생성속도" to="." method="_on_생성속도_value_changed"]
 [connection signal="timeout" from="Timer공추가" to="." method="_on_timer공추가_timeout"]
