@@ -14,31 +14,72 @@ func _ready() -> void:
 	reset_camera_pos()
 	set_walls()
 	add_수비수()
-	$"야구베트".position = 수비수이름위치.포수 + Vector3(-1.6,0,-1.5)
+	$"야구베트".position = 베이스위치.홈 + Vector3(-1.5,0,0)
+	$"야구베트".set_radius_height(Config.BallRadius, Config.WorldSize.y)
 
+var 베이스위치 :Dictionary
 var 수비수이름위치 :Dictionary 
 func add_수비수() -> void:
 	수비수이름위치 = {}
-	var 내야shift = Config.WorldSize.x / 3
+	베이스위치 = {}
+	var 내야shift = Config.WorldSize.x / 4
 	var 투수위치 = Config.WorldSize/2 
-	투수위치.z = Config.WorldSize.z - 내야shift -1
+	투수위치.z = Config.WorldSize.z - 내야shift -2
+	베이스위치["홈"] = 투수위치 + Vector3(0,0,내야shift)
+	베이스위치["1루"] = 투수위치 + Vector3(내야shift,0,0)
+	베이스위치["2루"] = 투수위치 + Vector3(0,0,-내야shift)
+	베이스위치["3루"] = 투수위치 + Vector3(-내야shift,0,0)
 	수비수이름위치["투수"] = 투수위치
-	수비수이름위치["포수"] = 투수위치 + Vector3(0,0,내야shift) # 포수
-	수비수이름위치["1루수"] = 투수위치 + Vector3(내야shift,0,0) # 1루수 
-	수비수이름위치["3루수"] = 투수위치 + Vector3(-내야shift,0,0) # 3루수
-	수비수이름위치["2루수"] = 투수위치 + Vector3(2,0,-내야shift) # 2루수 
-	수비수이름위치["유격수"] = 투수위치 + Vector3(-2,0,-내야shift) # 유격수
+	수비수이름위치["포수"] = 베이스위치["홈"] + Vector3(0,0,2)
+	수비수이름위치["1루수"] = 베이스위치["1루"] + Vector3(-1,0,0)
+	수비수이름위치["3루수"] = 베이스위치["3루"] + Vector3(1,0,0)
+	수비수이름위치["2루수"] = 베이스위치["2루"] + Vector3(3,0,0)
+	수비수이름위치["유격수"] = 베이스위치["2루"] + Vector3(-3,0,0)
+	수비수이름위치["중견수"] = 베이스위치["2루"] + Vector3(0,0,-내야shift)
+	수비수이름위치["우익수"] = 베이스위치["2루"] + Vector3(내야shift*1.5,0,-내야shift)
+	수비수이름위치["좌익수"] = 베이스위치["2루"] + Vector3(-내야shift*1.5,0,-내야shift)
 	for n in 수비수이름위치.keys():
 		add_pin(n)
+	for n in 베이스위치:
+		add_베이스(n)
+	add_line(베이스위치["홈"], 베이스위치["1루"])
+	add_line(베이스위치["2루"], 베이스위치["1루"])
+	add_line(베이스위치["3루"], 베이스위치["2루"])
+	add_line(베이스위치["3루"], 베이스위치["홈"])
 
 func add_pin(name :String) -> Pin:
 	var b = preload("res://pin.tscn").instantiate().set_color( get_randomcolor()
 		).set_label(name
-		).set_radius_height(Config.BallRadius/6, Config.WorldSize.y)
+		).set_radius_height(Config.BallRadius, Config.WorldSize.y)
 	b.position = 수비수이름위치[name]
 	b.set_default_pos(b.position) 
 	$PinContainer.add_child(b)
 	return b	
+	
+func add_베이스(name :String) -> void:
+	var minst = MeshInstance3D.new()
+	minst.mesh = CylinderMesh.new()
+	minst.mesh.height = 0.01
+	minst.mesh.top_radius = 0.3
+	minst.mesh.bottom_radius = 0.3
+	minst.mesh.material = StandardMaterial3D.new()
+	#minst.mesh.material.albedo_color = get_randomcolor()
+	minst.position = 베이스위치[name]
+	minst.position.y = 0.01
+	add_child(minst)
+
+func add_line(p1 :Vector3, p2 :Vector3) -> void:
+	var minst = MeshInstance3D.new()
+	minst.mesh = BoxMesh.new()
+	var l = (p1-p2).length()
+	minst.mesh.size = Vector3(l,0.01,0.1)
+	minst.mesh.material = StandardMaterial3D.new()
+	#minst.mesh.material.albedo_color = get_randomcolor()
+	minst.position = (p1+p2)/2
+	minst.position.y = 0.01
+	minst.rotate_y( (p2-p1).angle_to(Vector3.FORWARD) )
+	add_child(minst)
+
 
 func set_walls() -> void:
 	$WallContainer.add_child(set_pos_rot(Config.BottomCenter, Vector3.ZERO,
