@@ -11,34 +11,32 @@ func set_label(s :String) -> 수비수:
 	return self
 
 func set_material(mat :Material) -> 수비수:
-	$막대모양.mesh.material = mat
-	$"공모양".mesh.material = mat
+	$몸모양.mesh.material = mat
+	$"머리모양".mesh.material = mat
+	$"팔모양".mesh.material = mat
 	return self
 
 func set_color(co :Color) -> 수비수:
-	$막대모양.mesh.material.albedo_color = co
-	$"공모양".mesh.material.albedo_color = co
+	$몸모양.mesh.material.albedo_color = co
+	$"머리모양".mesh.material.albedo_color = co
+	$"팔모양".mesh.material.albedo_color = co
 	return self
 
 func get_color() -> Color:
-	return $막대모양.mesh.material.albedo_color
+	return $몸모양.mesh.material.albedo_color
 
 func set_radius_height(r :float, h:float) -> 수비수:
-	$막대모양.mesh.top_radius = r
-	$막대모양.mesh.bottom_radius = r
-	$막대모양.mesh.height = h
-	$공모양.mesh.radius = r *1.5
-	$공모양.mesh.height = $공모양.mesh.radius*2
-	$공모양.position.y = h/2
-	$CollisionShape3D.shape.radius = r
-	$CollisionShape3D.shape.height = h
+	$몸모양.mesh.top_radius = r
+	$몸모양.mesh.bottom_radius = r
+	$몸모양.mesh.height = h
+	$팔모양.mesh.top_radius = r
+	$팔모양.mesh.bottom_radius = r
+	$팔모양.mesh.height = h
+	$머리모양.mesh.radius = r *1.5
+	$머리모양.mesh.height = $머리모양.mesh.radius*2
+	$머리모양.position.y = h/2
+	$CollisionShape3D.shape.size = Vector3(h,h,r*2)
 	return self
 
-var collision_count :int
-func 공부딪힘(b :Ball) -> void:
+func 위치이동() -> void:
 	position = default_pos + Vector3(randfn(0.0, 0.01), 0 , randfn(0.0, 0.01))
-	collision_count += 1
-	$Label3D.text = "%s" % collision_count
-
-func show_collision_count(b :bool) -> void:
-	$Label3D.visible = b

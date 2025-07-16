@@ -117,8 +117,11 @@ func shoot_ball(pos :Vector3) -> void:
 	d.ball_ended.connect(ball_ended)
 	d.position = pos + Vector3(0,0,Config.BallRadius*2)
 
-func ball_ended(pos :Vector3) -> void:
-	pass
+func ball_ended(n :Node3D) -> void:
+	if n is Wall:
+		pass
+	elif n is 수비수:
+		pass
 
 var camera_move = false
 func _process(delta: float) -> void:

@@ -1,7 +1,7 @@
 extends RigidBody3D
 class_name Ball
 
-signal ball_ended(pos :Vector3)
+signal ball_ended(n :Node3D)
 
 var life_time :float
 func start_life() -> Ball:
@@ -37,9 +37,7 @@ func set_radius(r :float) -> Ball:
 	return self
 	
 func _on_body_entered(body: Node) -> void:
-	if body is Wall and position.z >= Config.WorldSize.z -$CollisionShape3D.shape.radius*2:
-		queue_free()
-		ball_ended.emit(position)
+	if body is Wall:
+		ball_ended.emit(body)
 	elif body is 수비수:
-		pass
-		#body.공부딪힘(self)
+		ball_ended.emit(body)

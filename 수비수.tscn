@@ -1,15 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://hpbksrirxv1d"]
+[gd_scene load_steps=10 format=3 uid="uid://hpbksrirxv1d"]
 
-[ext_resource type="Script" uid="uid://bpusp3ev387k1" path="res://수비수.gd" id="1_jbs3q"]
+[ext_resource type="Script" uid="uid://d2ewitcjokl7x" path="res://수비수.gd" id="1_jbs3q"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nkspu"]
 resource_local_to_scene = true
-friction = 0.0
-bounce = 0.5
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_qyha7"]
-height = 1.0
-radius = 0.05
+[sub_resource type="BoxShape3D" id="BoxShape3D_jbs3q"]
+size = Vector3(1, 1, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nikp6"]
 resource_local_to_scene = true
@@ -30,19 +27,33 @@ material = SubResource("StandardMaterial3D_gflbs")
 radius = 0.07
 height = 0.14
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbs3q"]
+resource_local_to_scene = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jbs3q"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_jbs3q")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.0
+
 [node name="수비수" type="StaticBody3D"]
 physics_material_override = SubResource("PhysicsMaterial_nkspu")
 script = ExtResource("1_jbs3q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_qyha7")
+shape = SubResource("BoxShape3D_jbs3q")
 
-[node name="막대모양" type="MeshInstance3D" parent="."]
+[node name="몸모양" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_qyha7")
 
-[node name="공모양" type="MeshInstance3D" parent="."]
+[node name="머리모양" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("SphereMesh_a0eh7")
+
+[node name="팔모양" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("CylinderMesh_jbs3q")
 
 [node name="Label3D" type="Label3D" parent="."]
 pixel_size = 0.01
