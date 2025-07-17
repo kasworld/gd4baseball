@@ -15,7 +15,7 @@ func _ready() -> void:
 	set_walls()
 	add_수비수들()
 	$"타자".position = 베이스위치.홈 + Vector3(-1.5,0,0)
-	$"타자".set_radius_height(Config.BallRadius/2, Config.WorldSize.y)
+	$"타자".set_radius_height(Config.BallRadius/3, Config.WorldSize.y)
 
 var 베이스위치 :Dictionary
 var 수비수이름위치 :Dictionary 

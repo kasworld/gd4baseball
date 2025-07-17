@@ -1,16 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://csdcaadrse82r"]
+[gd_scene load_steps=12 format=3 uid="uid://csdcaadrse82r"]
 
 [ext_resource type="Script" uid="uid://bq3ovqv0khcsj" path="res://타자.gd" id="1_5hh2p"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gewx7"]
 bounce = 10.0
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_5hh2p"]
-top_radius = 0.1
-bottom_radius = 0.1
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bykia"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5hh2p"]
-points = PackedVector3Array(-0.1, -1, 0, -0.0995302, -1, -0.00980815, -0.0995302, -1, 0.00978857, -0.1, 1, 0, -0.0980814, -1, -0.0195184, -0.0995302, 1, -0.00980815, -0.0980814, -1, 0.0194988, -0.0995302, 1, 0.00978857, -0.0957126, -1, -0.0290329, -0.0980814, 1, -0.0195184, -0.0957126, -1, 0.0290133, -0.0980814, 1, 0.0194988, -0.0924041, -1, -0.0382733, -0.0957126, 1, -0.0290329, -0.0924041, -1, 0.0382537, -0.0957126, 1, 0.0290133, -0.088195, -1, -0.0471417, -0.0924041, 1, -0.0382733, -0.088195, -1, 0.0471222, -0.0924041, 1, 0.0382537, -0.0831637, -1, -0.0555599, -0.088195, 1, -0.0471417, -0.0831637, -1, 0.0555403, -0.088195, 1, 0.0471222, -0.0773101, -1, -0.0634495, -0.0831637, 1, -0.0555599, -0.0773101, -1, 0.0634299, -0.0831637, 1, 0.0555403, -0.0707126, -1, -0.0707126, -0.0773101, 1, -0.0634495, -0.0707126, -1, 0.070693, -0.0773101, 1, 0.0634299, -0.0634495, -1, -0.0773101, -0.0707126, 1, -0.0707126, -0.0634495, -1, 0.0772905, -0.0707126, 1, 0.070693, -0.0555599, -1, -0.0831637, -0.0634495, 1, -0.0773101, -0.0555599, -1, 0.0831441, -0.0634495, 1, 0.0772905, -0.0471417, -1, -0.088195, -0.0555599, 1, -0.0831637, -0.0471417, -1, 0.0881754, -0.0555599, 1, 0.0831441, -0.0382733, -1, -0.0924041, -0.0471417, 1, -0.088195, -0.0382733, -1, 0.0923845, -0.0471417, 1, 0.0881754, -0.0290329, -1, -0.0957126, -0.0382733, 1, -0.0924041, -0.0290329, -1, 0.095693, -0.0382733, 1, 0.0923845, -0.0195184, -1, -0.0980814, -0.0290329, 1, -0.0957126, -0.0195184, -1, 0.0980619, -0.0290329, 1, 0.095693, -0.00980815, -1, -0.0995302, -0.0195184, 1, -0.0980814, -0.00980815, -1, 0.0995106, -0.0195184, 1, 0.0980619, 0, -1, -0.1, -0.00980815, 1, -0.0995302, 0, -1, 0.1, -0.00980815, 1, 0.0995106, 0.00978857, -1, -0.0995302, 0, 1, -0.1, 0.00978857, -1, 0.0995106, 0, 1, 0.1, 0.0194988, -1, -0.0980814, 0.00978857, 1, -0.0995302, 0.0194988, -1, 0.0980619, 0.00978857, 1, 0.0995106, 0.0290133, -1, -0.0957126, 0.0194988, 1, -0.0980814, 0.0290133, -1, 0.095693, 0.0194988, 1, 0.0980619, 0.0382537, -1, -0.0924041, 0.0290133, 1, -0.0957126, 0.0382537, -1, 0.0923845, 0.0290133, 1, 0.095693, 0.0471222, -1, -0.088195, 0.0382537, 1, -0.0924041, 0.0471222, -1, 0.0881754, 0.0382537, 1, 0.0923845, 0.0555403, -1, -0.0831637, 0.0471222, 1, -0.088195, 0.0555403, -1, 0.0831441, 0.0471222, 1, 0.0881754, 0.0634299, -1, -0.0773101, 0.0555403, 1, -0.0831637, 0.0634299, -1, 0.0772905, 0.0555403, 1, 0.0831441, 0.070693, -1, -0.0707126, 0.0634299, 1, -0.0773101, 0.070693, -1, 0.070693, 0.0634299, 1, 0.0772905, 0.0772905, -1, -0.0634495, 0.070693, 1, -0.0707126, 0.0772905, -1, 0.0634299, 0.070693, 1, 0.070693, 0.0831441, -1, -0.0555599, 0.0772905, 1, -0.0634495, 0.0831441, -1, 0.0555403, 0.0772905, 1, 0.0634299, 0.0881754, -1, -0.0471417, 0.0831441, 1, -0.0555599, 0.0881754, -1, 0.0471222, 0.0831441, 1, 0.0555403, 0.0923845, -1, -0.0382733, 0.0881754, 1, -0.0471417, 0.0923845, -1, 0.0382537, 0.0881754, 1, 0.0471222, 0.095693, -1, -0.0290329, 0.0923845, 1, -0.0382733, 0.095693, -1, 0.0290133, 0.0923845, 1, 0.0382537, 0.0980619, -1, -0.0195184, 0.095693, 1, -0.0290329, 0.0980619, -1, 0.0194988, 0.095693, 1, 0.0290133, 0.0995106, -1, -0.00980815, 0.0980619, 1, -0.0195184, 0.0995106, -1, 0.00978857, 0.0980619, 1, 0.0194988, 0.1, -1, 0, 0.0995106, 1, -0.00980815, 0.0995106, 1, 0.00978857, 0.1, 1, 0)
+[sub_resource type="BoxMesh" id="BoxMesh_1ksfr"]
+material = SubResource("StandardMaterial3D_bykia")
+size = Vector3(1.8, 0.9, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bykia"]
+size = Vector3(1.8, 0.9, 0.1)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5hh2p"]
 
@@ -37,43 +39,42 @@ material = SubResource("StandardMaterial3D_sbg6f")
 radius = 0.07
 height = 0.14
 
-[node name="야구베트" type="Node3D"]
+[node name="타자" type="Node3D"]
 script = ExtResource("1_5hh2p")
 
 [node name="HingeJoint3D" type="HingeJoint3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-node_a = NodePath("../RigidBody3D")
-node_b = NodePath("../StaticBody3D")
+node_a = NodePath("../베트")
+node_b = NodePath("../선수")
 motor/enable = true
 motor/target_velocity = -6.98132
 motor/max_impulse = 10.0
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+[node name="베트" type="RigidBody3D" parent="."]
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_gewx7")
 gravity_scale = 0.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1, 0, 0)
-mesh = SubResource("CylinderMesh_5hh2p")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="베트"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+mesh = SubResource("BoxMesh_1ksfr")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_5hh2p")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="베트"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_bykia")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="선수" type="StaticBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_5hh2p")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="선수"]
 shape = SubResource("CylinderShape3D_8boj5")
 
-[node name="막대모양" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="막대모양" type="MeshInstance3D" parent="선수"]
 mesh = SubResource("CylinderMesh_uh5x0")
 skeleton = NodePath("../..")
 
-[node name="공모양" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="공모양" type="MeshInstance3D" parent="선수"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("SphereMesh_x2x7l")
 skeleton = NodePath("../..")
