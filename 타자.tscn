@@ -88,5 +88,6 @@ outline_modulate = Color(1, 1, 1, 1)
 text = "타자"
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
