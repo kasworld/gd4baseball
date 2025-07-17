@@ -10,6 +10,9 @@ func set_label(s :String) -> 수비수:
 	$Label3D.text = s
 	return self
 
+func get_labeltext() -> String:
+	return $Label3D.text
+
 func set_material(mat :Material) -> 수비수:
 	$몸모양.mesh.material = mat
 	$"머리모양".mesh.material = mat
@@ -38,5 +41,9 @@ func set_radius_height(r :float, h:float) -> 수비수:
 	$CollisionShape3D.shape.size = Vector3(h,h,r*2)
 	return self
 
-func 위치이동() -> void:
-	position = default_pos + Vector3(randfn(0.0, 0.01), 0 , randfn(0.0, 0.01))
+func 위치변경() -> void:
+	var l = $팔모양.mesh.height/4
+	position = default_pos + Vector3(randfn(0.0, l), 0 , randfn(0.0, l))
+
+func 각도변경() -> void:
+	rotation.y = randfn(0.0, PI)

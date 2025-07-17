@@ -36,26 +36,33 @@ func add_수비수들() -> void:
 	수비수이름위치["2루수"] = 베이스위치["2루"] + Vector3(3,0,0)
 	수비수이름위치["유격수"] = 베이스위치["2루"] + Vector3(-3,0,0)
 	수비수이름위치["중견수"] = 베이스위치["2루"] + Vector3(0,0,-내야shift)
-	수비수이름위치["우익수"] = 베이스위치["2루"] + Vector3(내야shift*1.5,0,-내야shift)
-	수비수이름위치["좌익수"] = 베이스위치["2루"] + Vector3(-내야shift*1.5,0,-내야shift)
+	수비수이름위치["우익수"] = 베이스위치["2루"] + Vector3(내야shift*1.5,0,-내야shift+2)
+	수비수이름위치["좌익수"] = 베이스위치["2루"] + Vector3(-내야shift*1.5,0,-내야shift+2)
 	for n in 수비수이름위치.keys():
 		add_수비수(n)
 	for n in 베이스위치:
 		add_베이스(n)
-	add_line(베이스위치["홈"], 베이스위치["1루"])
+	add_line(베이스위치["홈"], 베이스위치["1루"] + 베이스위치["1루"] - 베이스위치["홈"] )
 	add_line(베이스위치["2루"], 베이스위치["1루"])
 	add_line(베이스위치["3루"], 베이스위치["2루"])
-	add_line(베이스위치["3루"], 베이스위치["홈"])
+	add_line(베이스위치["3루"] + 베이스위치["3루"] - 베이스위치["홈"], 베이스위치["홈"]  )
 
 func add_수비수(name :String) -> 수비수:
 	var b = preload("res://수비수.tscn").instantiate().set_color( get_randomcolor()
 		).set_label(name
-		).set_radius_height(Config.BallRadius/2, Config.WorldSize.y)
+		).set_radius_height(Config.BallRadius/3, Config.WorldSize.y)
 	b.position = 수비수이름위치[name]
 	b.set_default_pos(b.position) 
 	$PinContainer.add_child(b)
 	return b	
-	
+
+func 수비위치변경() -> void:
+	for n in $PinContainer.get_children():
+		if n.get_labeltext() == "포수":
+			continue
+		n.위치변경()
+		n.각도변경()
+		
 func add_베이스(name :String) -> void:
 	var minst = MeshInstance3D.new()
 	minst.mesh = CylinderMesh.new()
@@ -116,6 +123,7 @@ func shoot_ball(pos :Vector3) -> void:
 	ball_droped += 1
 	d.ball_ended.connect(ball_ended)
 	d.position = pos + Vector3(0,0,Config.BallRadius*2)
+	수비위치변경()
 
 func ball_ended(n :Node3D) -> void:
 	if n is Wall:
