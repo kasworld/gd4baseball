@@ -61,7 +61,6 @@ func 수비위치변경() -> void:
 		if n.get_labeltext() == "포수":
 			continue
 		n.위치변경()
-		n.각도변경()
 		
 func add_베이스(name :String) -> void:
 	var minst = MeshInstance3D.new()
@@ -86,7 +85,6 @@ func add_line(p1 :Vector3, p2 :Vector3) -> void:
 	minst.position.y = 0.01
 	minst.rotate_y( (p2-p1).angle_to(Vector3.FORWARD) )
 	add_child(minst)
-
 
 func set_walls() -> void:
 	$WallContainer.add_child(set_pos_rot(Config.BottomCenter, Vector3.ZERO,
@@ -124,7 +122,7 @@ func shoot_ball(pos :Vector3) -> void:
 	ball_droped += 1
 	d.ball_ended.connect(ball_ended)
 	d.position = pos + Vector3(0,0,Config.BallRadius*2)
-	$"타자".휘두르기()
+	#$"타자".휘두르기()
 	
 func ball_ended(n :Node3D) -> void:
 	if n is Wall:
@@ -146,6 +144,9 @@ func _process(delta: float) -> void:
 
 func update_label() -> void:
 	$"왼쪽패널/LabelDrops".text = "ball drops %s" %[ball_droped]
+	$"왼쪽패널/Label".text = "생성속도 %s 초/공" % $"왼쪽패널/생성속도".value
+	$"왼쪽패널/Label2".text = "발사속도 %s m/s" % $"왼쪽패널/발사속도".value
+
 	$"왼쪽패널/LabelPerformance".text = """%d FPS (%.2f mspf)
 %d objects
 %dK primitive indices
@@ -159,6 +160,7 @@ func update_label() -> void:
 var key2fn = {
 	KEY_ESCAPE:_on_button_esc_pressed,
 	KEY_ENTER:_on_카메라변경_pressed,
+	KEY_SPACE: _on_휘두르기_pressed,
 }
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
@@ -186,3 +188,6 @@ func _on_timer공추가_timeout() -> void:
 
 func _on_생성속도_value_changed(value: float) -> void:
 	$"Timer공추가".wait_time = value
+
+func _on_휘두르기_pressed() -> void:
+	$"타자".휘두르기()
