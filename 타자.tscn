@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://csdcaadrse82r"]
 
-[ext_resource type="Script" uid="uid://bq3ovqv0khcsj" path="res://야구베트.gd" id="1_5hh2p"]
+[ext_resource type="Script" uid="uid://bq3ovqv0khcsj" path="res://타자.gd" id="1_5hh2p"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gewx7"]
 bounce = 10.0

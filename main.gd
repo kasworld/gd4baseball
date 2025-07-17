@@ -14,8 +14,8 @@ func _ready() -> void:
 	reset_camera_pos()
 	set_walls()
 	add_수비수들()
-	$"야구베트".position = 베이스위치.홈 + Vector3(-1.5,0,0)
-	$"야구베트".set_radius_height(Config.BallRadius/2, Config.WorldSize.y)
+	$"타자".position = 베이스위치.홈 + Vector3(-1.5,0,0)
+	$"타자".set_radius_height(Config.BallRadius/2, Config.WorldSize.y)
 
 var 베이스위치 :Dictionary
 var 수비수이름위치 :Dictionary 
@@ -53,11 +53,11 @@ func add_수비수(name :String) -> 수비수:
 		).set_radius_height(Config.BallRadius/3, Config.WorldSize.y)
 	b.position = 수비수이름위치[name]
 	b.set_default_pos(b.position) 
-	$PinContainer.add_child(b)
+	$수비수들.add_child(b)
 	return b	
 
 func 수비위치변경() -> void:
-	for n in $PinContainer.get_children():
+	for n in $수비수들.get_children():
 		if n.get_labeltext() == "포수":
 			continue
 		n.위치변경()

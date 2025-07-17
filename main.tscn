@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bvyp8di51u61r"]
 
 [ext_resource type="Script" uid="uid://c0iidw5g3885m" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://csdcaadrse82r" path="res://야구베트.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://csdcaadrse82r" path="res://타자.tscn" id="3_h2yge"]
 
 [sub_resource type="Theme" id="Theme_h2yge"]
 default_font_size = 48
@@ -66,9 +66,9 @@ value = 20.0
 [node name="Timer공추가" type="Timer" parent="."]
 autostart = true
 
-[node name="야구베트" parent="." instance=ExtResource("3_h2yge")]
+[node name="타자" parent="." instance=ExtResource("3_h2yge")]
 
-[node name="PinContainer" type="Node3D" parent="."]
+[node name="수비수들" type="Node3D" parent="."]
 
 [connection signal="value_changed" from="왼쪽패널/생성속도" to="." method="_on_생성속도_value_changed"]
 [connection signal="timeout" from="Timer공추가" to="." method="_on_timer공추가_timeout"]

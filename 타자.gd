@@ -1,11 +1,11 @@
 extends Node3D
-class_name 야구베트
+class_name 타자
 
-func set_label(s :String) -> 야구베트:
+func set_label(s :String) -> 타자:
 	$Label3D.text = s
 	return self
 
-func set_radius_height(r :float, h:float) -> 야구베트:
+func set_radius_height(r :float, h:float) -> 타자:
 	$"StaticBody3D/막대모양".mesh.top_radius = r
 	$"StaticBody3D/막대모양".mesh.bottom_radius = r
 	$"StaticBody3D/막대모양".mesh.height = h
