@@ -114,6 +114,7 @@ func set_pos_rot(pos :Vector3, rot:Vector3, n: Node3D) -> Node3D:
 	return n
 
 func shoot_ball(pos :Vector3) -> void:
+	수비위치변경()
 	var 발사속도 = $"왼쪽패널/발사속도".value
 	var d = 	preload("res://ball.tscn").instantiate().start_life(
 		).set_radius(Config.BallRadius
@@ -123,8 +124,8 @@ func shoot_ball(pos :Vector3) -> void:
 	ball_droped += 1
 	d.ball_ended.connect(ball_ended)
 	d.position = pos + Vector3(0,0,Config.BallRadius*2)
-	수비위치변경()
-
+	$"타자".휘두르기()
+	
 func ball_ended(n :Node3D) -> void:
 	if n is Wall:
 		pass

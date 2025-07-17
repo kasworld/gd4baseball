@@ -15,3 +15,16 @@ func set_radius_height(r :float, h:float) -> 타자:
 	$선수/CollisionShape3D.shape.radius = r
 	$선수/CollisionShape3D.shape.height = h
 	return self
+
+func 휘두르기() -> void:
+	print("휘두르기")
+	#$HingeJoint3D.set_flag(HingeJoint3D.FLAG_ENABLE_MOTOR, false)
+	$HingeJoint3D.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, -PI*3)
+	#$HingeJoint3D.set_flag(HingeJoint3D.FLAG_ENABLE_MOTOR, true)
+	$Timer.start(0.5)
+
+func _on_timer_timeout() -> void:
+	print("되감기")
+	#$HingeJoint3D.set_flag(HingeJoint3D.FLAG_ENABLE_MOTOR, false)
+	$HingeJoint3D.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, PI*3)
+	#$HingeJoint3D.set_flag(HingeJoint3D.FLAG_ENABLE_MOTOR, true)
