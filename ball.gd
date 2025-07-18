@@ -1,7 +1,7 @@
 extends RigidBody3D
 class_name Ball
 
-signal ball_ended(n :Node3D)
+signal ball_ended(me:Ball, n :Node3D)
 
 var life_time :float
 func start_life() -> Ball:
@@ -38,6 +38,6 @@ func set_radius(r :float) -> Ball:
 	
 func _on_body_entered(body: Node) -> void:
 	if body is Wall:
-		ball_ended.emit(body)
+		ball_ended.emit(self, body)
 	elif body is 수비수:
-		ball_ended.emit(body)
+		ball_ended.emit(self, body)

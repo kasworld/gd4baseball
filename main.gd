@@ -1,6 +1,11 @@
 extends Node3D
 
-var ball_droped :int
+var 투구수 :int
+var 타격수 :int
+var 스트라이크수 :int
+var 아웃수 :int
+var 파울수 :int
+
 var dark_colors :Array
 
 func get_randomcolor() -> Color:
@@ -106,24 +111,29 @@ func set_pos_rot(pos :Vector3, rot:Vector3, n: Node3D) -> Node3D:
 	n.rotation = rot
 	return n
 
-func shoot_ball(pos :Vector3) -> void:
+func shoot_ball() -> void:
+	var pos = $"수비수들".get_child(0).position
 	var 발사속도 = $"왼쪽패널/발사속도".value
-	var d = 	preload("res://ball.tscn").instantiate().start_life(
+	var d = preload("res://ball.tscn").instantiate().start_life(
 		).set_radius(Config.BallRadius
 	)
 	d.set_velocity(Vector3(0,0,발사속도))
 	$BallContainer.add_child(d)
-	ball_droped += 1
+	투구수 += 1
 	d.ball_ended.connect(ball_ended)
 	d.position = pos + Vector3(0,0,Config.BallRadius*2)
-	#$"타자".휘두르기()
 	
-func ball_ended(n :Node3D) -> void:
+func ball_ended(b :Ball, n :Node3D) -> void:
 	if n is Wall:
-		pass
+		if n.get_labeltext() != "바닥" and n.get_labeltext() != "천장":
+			b.queue_free()
 	elif n is 수비수:
-		pass
-
+		if n.get_labeltext() == "포수":
+			스트라이크수 +=1
+		else:
+			아웃수 += 1
+		b.queue_free()
+		
 var camera_move = false
 func _process(delta: float) -> void:
 	if $BallContainer.get_child_count() > 0:
@@ -137,19 +147,14 @@ func _process(delta: float) -> void:
 		$Camera3D.look_at(Config.BottomCenter)
 
 func update_label() -> void:
-	$"왼쪽패널/LabelDrops".text = "ball drops %s" %[ball_droped]
-	$"왼쪽패널/Label".text = "생성속도 %s 초/공" % $"왼쪽패널/생성속도".value
-	$"왼쪽패널/Label2".text = "발사속도 %s m/s" % $"왼쪽패널/발사속도".value
+	$"왼쪽패널/투구수".text = "투구수 %s" % 투구수
+	$"왼쪽패널/타격시도".text = "타격시도 %s" % 타격수
+	$"왼쪽패널/스트라이크수".text = "스트라이크수 %s" % 스트라이크수
+	$"왼쪽패널/아웃수".text = "아웃수 %s" % 아웃수
+	$"왼쪽패널/파울수".text = "파울수 %s" % 파울수
 
-	$"왼쪽패널/LabelPerformance".text = """%d FPS (%.2f mspf)
-%d objects
-%dK primitive indices
-%d draw calls""" % [
-	Engine.get_frames_per_second(),1000.0 / Engine.get_frames_per_second(),
-	RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_TOTAL_OBJECTS_IN_FRAME),
-	RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_TOTAL_PRIMITIVES_IN_FRAME) * 0.001,
-	RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_TOTAL_DRAW_CALLS_IN_FRAME),
-	]
+	$"왼쪽패널/투구빈도".text = "투구빈도 %s 초/공" % $"왼쪽패널/생성속도".value
+	$"왼쪽패널/공속도".text = "공속도 %s m/s" % $"왼쪽패널/발사속도".value
 
 var key2fn = {
 	KEY_ESCAPE:_on_button_esc_pressed,
@@ -178,10 +183,11 @@ func reset_camera_pos()->void:
 	$Camera3D.far = Config.WorldSize.length()
 
 func _on_timer공추가_timeout() -> void:
-	shoot_ball(수비수이름위치.투수)
+	shoot_ball()
 
 func _on_생성속도_value_changed(value: float) -> void:
 	$"Timer공추가".wait_time = value
 
 func _on_휘두르기_pressed() -> void:
 	$"타자".휘두르기()
+	타격수 += 1
