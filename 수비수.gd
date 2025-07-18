@@ -2,12 +2,17 @@ extends StaticBody3D
 class_name 수비수
 
 var default_pos :Vector3
-func set_default_pos(pos :Vector3) -> 수비수:
-	default_pos = pos
-	return self
 
-func set_label(s :String) -> 수비수:
-	$Label3D.text = s
+func init(name :String, pos :Vector3) -> 수비수:
+	default_pos = pos
+	$Label3D.text = name
+	var animation = Animation.new()
+	animation.resource_name = name
+	var track_index = animation.add_track(Animation.TYPE_POSITION_3D)
+	animation.track_set_path(track_index, ":position")
+	animation.track_insert_key(track_index,0, default_pos)
+	animation.track_insert_key(track_index,1, default_pos)
+	$"AnimationPlayer위치".get_animation_library("").add_animation(name, animation)
 	return self
 
 func get_labeltext() -> String:
@@ -41,9 +46,15 @@ func set_radius_height(r :float, h:float) -> 수비수:
 	$CollisionShape3D.shape.size = Vector3(h,h,r*2)
 	return self
 
-func 위치변경() -> void:
+func 위치이동시작() -> void:
+	var newrad = randf_range(0,2*PI)
 	var l = $팔모양.mesh.height/4
-	position = default_pos + Vector3(randfn(0.0, l), 0 , randfn(0.0, l))
+	var 새위치 = default_pos + Vector3(sin(newrad), 0 , cos(newrad)) 
+	#$"AnimationPlayer위치".pause()
+	var aniname = $Label3D.text
+	$AnimationPlayer위치.get_animation(aniname).track_set_key_value(0,0,position)
+	$AnimationPlayer위치.get_animation(aniname).track_set_key_value(0,1,새위치)
+	$"AnimationPlayer위치".play(aniname)
 
-func 각도변경() -> void:
-	rotation.y = randfn(0.0, PI)
+func _on_animation_player위치_animation_finished(anim_name: StringName) -> void:
+	위치이동시작.call_deferred()

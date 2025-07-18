@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://hpbksrirxv1d"]
+[gd_scene load_steps=13 format=3 uid="uid://hpbksrirxv1d"]
 
 [ext_resource type="Script" uid="uid://d2ewitcjokl7x" path="res://수비수.gd" id="1_jbs3q"]
 
@@ -37,6 +37,33 @@ top_radius = 0.05
 bottom_radius = 0.05
 height = 1.0
 
+[sub_resource type="Animation" id="Animation_jbs3q"]
+resource_name = "new_animation"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.0666667, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_lntis"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jbs3q"]
+resource_local_to_scene = true
+_data = {
+&"RESET": SubResource("Animation_lntis"),
+&"new_animation": SubResource("Animation_jbs3q")
+}
+
 [node name="수비수" type="StaticBody3D"]
 physics_material_override = SubResource("PhysicsMaterial_nkspu")
 script = ExtResource("1_jbs3q")
@@ -61,3 +88,10 @@ billboard = 1
 no_depth_test = true
 modulate = Color(0, 0, 0, 1)
 outline_modulate = Color(1, 1, 1, 1)
+
+[node name="AnimationPlayer위치" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jbs3q")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer위치" to="." method="_on_animation_player위치_animation_finished"]

@@ -49,19 +49,14 @@ func add_수비수들() -> void:
 
 func add_수비수(name :String) -> 수비수:
 	var b = preload("res://수비수.tscn").instantiate().set_color( get_randomcolor()
-		).set_label(name
+		).init(name,수비수이름위치[name]
 		).set_radius_height(Config.BallRadius/3, Config.WorldSize.y)
 	b.position = 수비수이름위치[name]
-	b.set_default_pos(b.position) 
 	$수비수들.add_child(b)
+	if name != "포수":
+		b.위치이동시작()
 	return b	
 
-func 수비위치변경() -> void:
-	for n in $수비수들.get_children():
-		if n.get_labeltext() == "포수":
-			continue
-		n.위치변경()
-		
 func add_베이스(name :String) -> void:
 	var minst = MeshInstance3D.new()
 	minst.mesh = CylinderMesh.new()
@@ -112,7 +107,6 @@ func set_pos_rot(pos :Vector3, rot:Vector3, n: Node3D) -> Node3D:
 	return n
 
 func shoot_ball(pos :Vector3) -> void:
-	수비위치변경()
 	var 발사속도 = $"왼쪽패널/발사속도".value
 	var d = 	preload("res://ball.tscn").instantiate().start_life(
 		).set_radius(Config.BallRadius
