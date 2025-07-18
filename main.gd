@@ -5,6 +5,7 @@ var 타격수 :int
 var 스트라이크수 :int
 var 아웃수 :int
 var 파울수 :int
+var 안타수 :int
 
 var dark_colors :Array
 
@@ -125,8 +126,20 @@ func shoot_ball() -> void:
 	
 func ball_ended(b :Ball, n :Node3D) -> void:
 	if n is Wall:
-		if n.get_labeltext() != "바닥" and n.get_labeltext() != "천장":
-			b.queue_free()
+		match n.get_labeltext():
+			"바닥","천장":
+				pass
+			"서쪽","동쪽":
+				if b.position.z > 베이스위치["2루"].z:
+					파울수 += 1
+				else:
+					안타수 +=1
+				b.queue_free()
+			"북쪽":
+				안타수 +=1
+				b.queue_free()
+			"남쪽":
+				b.queue_free()
 	elif n is 수비수:
 		if n.get_labeltext() == "포수":
 			스트라이크수 +=1
@@ -152,6 +165,7 @@ func update_label() -> void:
 	$"왼쪽패널/스트라이크수".text = "스트라이크수 %s" % 스트라이크수
 	$"왼쪽패널/아웃수".text = "아웃수 %s" % 아웃수
 	$"왼쪽패널/파울수".text = "파울수 %s" % 파울수
+	$"왼쪽패널/안타수".text = "안타수 %s" % 안타수
 
 	$"왼쪽패널/투구빈도".text = "투구빈도 %s 초/공" % $"왼쪽패널/생성속도".value
 	$"왼쪽패널/공속도".text = "공속도 %s m/s" % $"왼쪽패널/발사속도".value
